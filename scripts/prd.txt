@@ -1,0 +1,568 @@
+# Product Requirements Document (PRD)
+
+Always Scheming Terminal PRD
+
+Overview
+
+The Always Scheming Terminal (AST) is a real-time news and data aggregation platform tailored for the gaming industry, inspired by phoenixnews.io. It solves the problem of fragmented gaming-related information by consolidating news, stock data, and fundraising announcements from diverse sources (newsletters, articles, podcasts, X posts) into a customizable, terminal-style interface. AST targets traders, investors, gaming enthusiasts, and industry professionals, offering actionable insights for news-based trading and industry tracking. Its value lies in its speed, personalization (e.g., advanced filtering, light/dark mode), and focus on gaming-specific content, with a subscription-based monetization model for sustainability.
+
+Problem Solved
+
+- Gaming news and financial data are scattered across multiple platforms, making it time-consuming to track trends, stocks, or fundraising.
+- Existing terminals (e.g., Bloomberg, phoenixnews.io) lack a gaming-specific focus, leaving traders and enthusiasts underserved.
+- Users need a fast, customizable platform to filter and prioritize relevant gaming content in real-time.
+
+Target Audience
+
+- Traders/Investors: Trading gaming stocks (e.g., EA, Tencent) or investing in startups.
+- Gaming Enthusiasts: Fans seeking real-time updates on games, genres, or platforms.
+- Industry Professionals: Developers, publishers, and analysts monitoring companies and fundraising.
+- Casual Gamers: Users interested in curated gaming news and trends.
+
+Value Proposition
+
+AST delivers a centralized, gaming-focused terminal that empowers users to make informed decisions with real-time news, stock data, and fundraising insights. Its phoenixnews.io-inspired UI, advanced filtering, and personalization make it an essential tool for the gaming ecosystem.
+
+Core Features
+
+1. Real-Time News Aggregation
+- What It Does: Aggregates gaming-related content from newsletters, articles, podcasts, press releases, and X posts in real-time.
+- Why It's Important: Centralizes fragmented information, enabling users to stay updated without visiting multiple sources.
+- How It Works:
+  - Sources: GamesIndustry.biz, IGN, Kotaku, The Game Maker's Notebook, X posts, Bloomberg (for financials).
+  - Implementation: Uses APIs (NewsAPI, RSS feeds), web scraping (Cheerio), and X API for content.
+  - Normalizes data into a consistent format (headline, source, date, summary) and updates every 1-5 minutes.
+  - Displays in a scrollable feed with links to original sources.
+
+2. Customizable Terminal Interface
+- What It Does: Provides a terminal-style UI with modular panels for news, stocks, and fundraising.
+- Why It's Important: Allows users to tailor the interface to their preferences, mimicking phoenixnews.io's flexibility.
+- How It Works:
+  - Components: Dashboard with news feed, stock tickers, search bar, and resizable panels.
+  - Customization: Drag-and-drop panels, save layouts per user account, toggle between compact/list views.
+  - Aesthetic: Monospaced fonts (e.g., Fira Code), gaming-themed icons (e.g., controllers).
+
+3. Advanced Filtering
+- What It Does: Enables users to filter content by topic (e.g., FPS, esports), date, category (e.g., news, stocks), source, or company.
+- Why It's Important: Ensures users see only relevant content, reducing noise.
+- How It Works:
+  - UI: Sidebar with dropdowns, checkboxes, and date sliders.
+  - Options: Filter by game, genre, platform, date range, or specific outlets.
+  - Features: Save filter presets, apply multiple filters simultaneously.
+
+4. Stock and Fundraising Data
+- What It Does: Displays real-time stock prices and fundraising announcements for gaming companies.
+- Why It's Important: Supports traders and investors with actionable financial data.
+- How It Works:
+  - Stocks: Integrates with Alpha Vantage or Yahoo Finance for price, market cap, and volume.
+  - Fundraising: Aggregates from press releases, X posts, and financial news (e.g., amount, investors, round type).
+  - Visualization: Line charts for stock trends (1D, 1W, 1M), timeline for fundraising events.
+  - Features: Watchlists for tracking companies.
+
+5. Light/Dark Mode
+- What It Does: Offers light and dark themes for the UI.
+- Why It's Important: Enhances accessibility and user comfort, aligning with modern UX standards.
+- How It Works:
+  - Toggle via a button, persists via local storage or user account.
+  - Ensures WCAG 2.1 compliance (high contrast, screen reader support).
+
+6. User Accounts
+- What It Does: Allows users to create accounts for saving preferences.
+- Why It's Important: Personalizes the experience and supports monetization.
+- How It Works:
+  - Features: Save layouts, filters, watchlists; manage profile (username, email).
+  - Login: Email/password or OAuth (Google, X).
+
+User Experience
+
+User Personas
+
+1. Trader Tom (Investor):
+- Profile: 30, stock trader, focuses on gaming companies (e.g., Activision, Nintendo).
+- Needs: Real-time stock data, fundraising news, company-specific filters.
+- Pain Points: Slow platforms, irrelevant news clutter.
+- AST Usage: Monitors stock charts, sets alerts for price changes, filters by company.
+
+2. Gamer Grace (Enthusiast):
+- Profile: 25, avid gamer, follows esports and indie games.
+- Needs: News on favorite genres (RPG, FPS), platform updates (PS5, PC).
+- Pain Points: Scattered sources, outdated news.
+- AST Usage: Filters by genre, saves presets for esports, uses dark mode.
+
+3. Dev Dana (Industry Professional):
+- Profile: 35, game developer, tracks industry trends and fundraising.
+- Needs: Fundraising announcements, competitor news.
+- Pain Points: Limited access to niche industry data.
+- AST Usage: Filters by fundraising category, tracks indie studio news.
+
+Key User Flows
+
+1. Onboarding:
+- User lands on homepage, sees default news feed and stock tickers.
+- Prompted to create account or continue as guest.
+- Guided tour highlights filters, customization, and theme toggle.
+
+2. Filtering Content:
+- User opens sidebar, selects filters (e.g., "RPG," "last 24 hours," "IGN").
+- Results update instantly in the feed; user saves preset.
+
+3. Tracking Stocks:
+- User searches for "EA," views stock chart and news.
+- Adds EA to watchlist, sets price alert.
+
+4. Customizing Layout:
+- User drags news panel to top, resizes stock panel.
+- Saves layout to account for future sessions.
+
+UI/UX Considerations
+
+- Design: Terminal aesthetic inspired by phoenixnews.io, with gaming flair (neon accents, pixel art icons).
+- Layout: Grid-based, resizable panels, responsive for mobile (collapsible sidebars).
+- Typography: Monospaced (Fira Code) for terminal vibe, sans-serif for readability.
+- Accessibility: WCAG 2.1 compliance (keyboard navigation, alt text for charts).
+- Feedback: Tooltips for filters, loading indicators for real-time updates.
+
+Technical Architecture
+
+System Components (Cost-Optimized)
+
+- Frontend: Next.js 14 (App Router) with TypeScript, Tailwind CSS for styling, Lightweight Charts (free version) for financial visualizations
+- Backend: Next.js API Routes + Edge Runtime (included in Vercel's free tier)
+- Database: Supabase (free tier: 500MB database, 1GB file storage)
+- Aggregation Layer: Vercel Edge Functions (included in free tier, 100K invocations/day)
+- Caching: Vercel KV (free tier) for initial development, upgrade to Upstash only when needed
+- Authentication: Supabase Auth (included in free tier)
+
+Data Models (Using Supabase/PostgreSQL)
+
+1. News Item:
+```sql
+create table news_items (
+  id uuid default gen_random_uuid() primary key,
+  headline text not null,
+  source text not null,
+  url text not null,
+  published_at timestamptz not null,
+  summary text,
+  category text[],
+  topics text[],
+  companies text[],
+  created_at timestamptz default now()
+);
+```
+
+2. Stock Data:
+```sql
+create table stock_data (
+  id uuid default gen_random_uuid() primary key,
+  company text not null,
+  ticker text not null,
+  price decimal not null,
+  change decimal,
+  market_cap bigint,
+  volume bigint,
+  updated_at timestamptz default now()
+);
+```
+
+3. Fundraising Event:
+```sql
+create table fundraising_events (
+  id uuid default gen_random_uuid() primary key,
+  company text not null,
+  amount decimal,
+  investors text[],
+  round text,
+  announced_at timestamptz not null,
+  source text,
+  created_at timestamptz default now()
+);
+```
+
+4. User (Managed by Supabase Auth + Custom Profile):
+```sql
+create table profiles (
+  id uuid references auth.users primary key,
+  email text not null,
+  preferences jsonb default '{}',
+  theme text default 'dark',
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+```
+
+State Management & Data Fetching:
+
+- TanStack Query (React Query) for server state management and real-time updates
+- Zustand for client-side UI state (panels, layouts, preferences)
+- Supabase Realtime for live database subscriptions
+- SWR pattern for optimistic updates and background revalidation
+
+APIs and Integrations (Cost-Optimized)
+
+1. News Aggregation (Free/Low-Cost Approach):
+- RSS feeds for newsletters (self-hosted RSS parser)
+- Custom web scraping with Cheerio (via Edge Functions)
+- Free news APIs (limited but sufficient for MVP):
+  - Bing News API (free tier)
+  - GNews API (free tier: 100 calls/day)
+  - MediaStack (free tier: 500 requests/month)
+- GitHub Actions for scheduled scraping (free tier: 2000 minutes/month)
+
+2. Financial Data (Free/Low-Cost Approach):
+- Yahoo Finance API (free, unofficial)
+- Alpha Vantage (free tier: 5 API calls/minute)
+- Finnhub (free tier: 60 API calls/minute)
+- Custom web scraping for fundraising news
+- Authentication: Supabase Auth (free tier)
+- Payments: Stripe (pay as you go, no monthly fees)
+
+Infrastructure Requirements (Cost-Optimized)
+
+- Hosting: Vercel (free tier)
+  - Unlimited static sites
+  - 100GB bandwidth/month
+  - 100 serverless function invocations/day
+  - Auto HTTPS/SSL
+  - Global CDN
+
+- Database: Supabase (free tier)
+  - 500MB database
+  - 1GB file storage
+  - 2GB bandwidth
+  - 50,000 monthly active users
+  - Daily backups
+
+- Monitoring: 
+  - Vercel Analytics (free tier)
+  - Sentry (free tier: 5K errors/month)
+  - LogTail (free tier)
+
+- Security: 
+  - Supabase RLS (included)
+  - Next.js middleware (included)
+  - Rate limiting via Edge Functions
+  - CORS and CSP headers
+
+Development Roadmap (Cost-Optimized)
+
+Phase 1: MVP Foundation (2-3 weeks)
+
+Scope:
+- Next.js 14 project setup with free tier services
+- Supabase initialization (free tier)
+- Basic authentication flow
+- RSS feed parser implementation
+- Simple web scraping setup
+- Basic terminal-style UI with dark mode
+- Yahoo Finance API integration
+- Vercel deployment (free tier)
+
+Deliverables:
+- Git repository with proper TypeScript configuration
+- Basic Next.js pages and components structure
+- Supabase tables and RLS policies
+- Authentication components (login/signup)
+- Simple news feed component
+- Basic stock chart component
+- CI/CD workflow in Vercel
+
+Phase 2: Core Features (3-4 weeks)
+
+Scope:
+- Custom news aggregation system
+- Multiple RSS feed integration
+- Basic web scraping pipeline
+- Yahoo Finance data integration
+- Simple caching with Vercel KV
+- Rate limiting implementation
+- Basic error monitoring with Sentry
+
+Deliverables:
+- Data fetching hooks with TanStack Query
+- Global state management with Zustand
+- News aggregation from multiple sources
+- Real-time stock data display
+- Filter components and logic
+- Basic layout customization
+- User settings page
+
+Phase 3: Advanced Features (4-5 weeks)
+
+Scope:
+- Real-time updates with Supabase subscriptions
+- Advanced chart features with TradingView
+- Full layout customization with drag-and-drop
+- Stripe subscription integration
+- Email notifications system
+- Advanced caching with Upstash Redis
+- Performance optimizations
+
+Deliverables:
+- Real-time data subscription system
+- Advanced charting components
+- Drag-and-drop layout system
+- Subscription management system
+- Notification preferences and delivery
+- Caching layer implementation
+- Performance monitoring setup
+
+Phase 4: Polish and Scale (3-4 weeks)
+
+Scope:
+- Mobile responsive design
+- PWA implementation
+- API documentation
+- Advanced analytics
+- Security hardening
+- Performance optimization
+- User feedback system
+
+Deliverables:
+- Mobile-friendly UI
+- PWA manifest and service workers
+- API documentation site
+- Analytics dashboard
+- Security audit results
+- Performance metrics
+- Feedback collection system
+
+Local Development Setup
+
+Requirements:
+- Node.js 18+ (LTS version recommended)
+- pnpm (preferred) or npm
+- Git
+- VS Code with recommended extensions:
+  - Tailwind CSS IntelliSense
+  - ESLint
+  - Prettier
+  - TypeScript + JavaScript
+  - Supabase VS Code
+
+Environment Setup:
+
+1. Initial Setup
+```bash
+# Clone repository
+git clone <repository-url>
+cd <project-directory>
+
+# Install dependencies
+pnpm install
+
+# Set up environment variables
+cp .env.example .env.local
+```
+
+2. Environment Variables
+```env
+# Core
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_supabase_service_key
+
+# APIs
+NEWSAPI_KEY=your_newsapi_key
+POLYGON_API_KEY=your_polygon_key
+TWITTER_API_KEY=your_twitter_key
+
+# Services
+UPSTASH_REDIS_REST_URL=your_upstash_url
+UPSTASH_REDIS_REST_TOKEN=your_upstash_token
+
+# Stripe
+STRIPE_SECRET_KEY=your_stripe_secret_key
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=your_stripe_publishable_key
+STRIPE_WEBHOOK_SECRET=your_stripe_webhook_secret
+```
+
+3. Database Setup
+```bash
+# Install Supabase CLI
+pnpm add -g supabase
+
+# Start local Supabase
+supabase start
+
+# Apply migrations
+supabase db reset
+```
+
+4. Development Server
+```bash
+# Start development server
+pnpm dev
+
+# Run type checking
+pnpm type-check
+
+# Run tests
+pnpm test
+```
+
+5. Recommended VS Code Settings
+```json
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "typescript.tsdk": "node_modules/typescript/lib"
+}
+```
+
+Cost Analysis (Optimized for Bootstrap Phase)
+
+1. Fixed Infrastructure Costs (Monthly) - Bootstrap Phase
+
+Vercel (Free Tier):
+- Unlimited static sites
+- 100GB bandwidth
+- 100 serverless functions
+- Global CDN
+- Auto HTTPS
+
+Supabase (Free Tier):
+- 500MB database
+- 1GB file storage
+- 2GB bandwidth
+- Daily backups
+- 50K MAU
+
+Total Fixed Costs: $0/month for initial launch
+
+2. Optional Infrastructure Upgrades (When Needed)
+
+Vercel Pro ($20/month):
+- Only needed when exceeding:
+  - 100GB bandwidth
+  - 100 serverless functions/day
+  - Or requiring preview deployments
+
+Supabase Pro ($25/month):
+- Only needed when exceeding:
+  - 500MB database
+  - 1GB file storage
+  - 50K MAU
+  - Or requiring daily backups
+
+3. Free API Tiers (Daily Limits)
+
+News Data:
+- Bing News API: 1000 calls/month (free)
+- GNews: 100 calls/day (free)
+- MediaStack: 500 requests/month (free)
+- RSS Feeds: Unlimited (free)
+- Web Scraping: Limited by compute (free)
+
+Financial Data:
+- Yahoo Finance API: Unlimited (free)
+- Alpha Vantage: 5 calls/minute (free)
+- Finnhub: 60 calls/minute (free)
+
+4. Growth-Based Upgrades
+
+When reaching 1000+ users:
+- Upgrade to Vercel Pro: $20/month
+- Upgrade to Supabase Pro: $25/month
+- Consider paid API tiers based on usage
+
+When reaching 5000+ users:
+- Consider Upstash Redis: $25/month
+- Evaluate paid news APIs
+- Implement premium features
+
+Bootstrap Phase Optimization:
+
+1. Development Phase ($0/month):
+- Use only free tiers
+- Implement aggressive caching
+- Rate limit all external APIs
+- Build robust error handling
+
+2. Launch Phase ($0-20/month):
+- Start with free tiers
+- Monitor usage patterns
+- Cache aggressively
+- Implement request pooling
+
+3. Growth Triggers:
+- Upgrade Vercel: When hitting 80% of free bandwidth
+- Upgrade Supabase: At 400MB database usage
+- Add Upstash: When needing distributed caching
+- Add paid APIs: When free limits affect UX
+
+4. Revenue Strategy:
+- Free tier: Basic features, delayed data
+- Premium ($5/month): Real-time data, advanced filters
+- Pro ($15/month): API access, custom layouts
+- Break even point: 50 pro users or 150 premium users
+
+Cost Control Measures:
+
+1. Technical Optimizations:
+- Edge caching for static content
+- Aggressive API response caching
+- Batch processing for updates
+- Efficient database queries
+- Image optimization and lazy loading
+
+2. Infrastructure Optimization:
+- Monitor serverless function usage
+- Optimize database queries
+- Use edge functions for global performance
+- Implement smart caching strategies
+
+3. API Usage Optimization:
+- Pool similar requests
+- Implement stale-while-revalidate
+- Cache API responses
+- Use webhooks where possible
+- Batch updates
+
+4. Scaling Strategy:
+- Start with minimal features
+- Add premium features gradually
+- Scale based on revenue
+- Maintain healthy margins
+- Focus on user acquisition
+
+## Risks and Mitigations
+
+### Technical Challenges
+
+Risk: High API costs for news and stock data.
+Mitigation: Use free/low-cost APIs (e.g., NewsAPI), cache data in Redis, optimize queries.
+
+Risk: Real-time updates strain server performance.
+Mitigation: Use serverless functions (AWS Lambda) and CDN (Cloudflare).
+
+### MVP Definition
+
+Risk: Scope creep delays MVP launch.
+Mitigation: Limit MVP to basic news, stocks, and filters; defer accounts and advanced features to Phase 2.
+
+Risk: MVP lacks user appeal.
+Mitigation: Focus on phoenixnews.io-inspired UI and core gaming content to attract early users.
+
+### Resource Constraints
+
+Risk: Limited developer bandwidth.
+Mitigation: Use frameworks (React, Tailwind) and CDNs to accelerate development; prioritize reusable components.
+
+Risk: Legal issues with news scraping.
+Mitigation: Rely on licensed APIs, respect robots.txt, and link to original sources.
+
+### Appendix
+
+Research Findings
+- Competitor Analysis: phoenixnews.io excels in customization and speed; AST can differentiate with gaming focus.
+- Gaming Industry: High interest in stocks (e.g., ATVI, TTWO) and indie fundraising (e.g., Kickstarter, venture capital).
+- User Needs: Traders want real-time data; enthusiasts want curated news by genre/platform.
+
+Technical Specifications
+- Frontend Dependencies: React, Tailwind CSS, Chart.js (via cdn.jsdelivr.net).
+- Backend Dependencies: Node.js, Express, MongoDB, Redis.
+- APIs: NewsAPI, Alpha Vantage, X API, Firebase Authentication.
+- Compliance: GDPR/CCPA for user data, WCAG 2.1 for accessibility.
