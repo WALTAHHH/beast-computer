@@ -4,18 +4,18 @@
             "command": "npx",
             "args": [
                 "-y",
-                "task-master-mcp"
+                "task-master-ai"
             ],
             "env": {
-                "ANTHROPIC_API_KEY": "YOUR_ANTHROPIC_API_KEY",
+                "ANTHROPIC_API_KEY": "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",
                 "PERPLEXITY_API_KEY": "YOUR_PERPLEXITY_API_KEY",
-                "MODEL": "claude-3-7-sonnet-20250219",
+                "MODEL": "claude-3-sonnet-20240229",
                 "PERPLEXITY_MODEL": "sonar-pro",
-                "MAX_TOKENS": "64000",
+                "MAX_TOKENS": "4096",
                 "TEMPERATURE": "0.2",
                 "DEFAULT_SUBTASKS": "5",
                 "DEFAULT_PRIORITY": "medium"
             }
         }
     }
-}
+} 
