@@ -1,4 +1,4 @@
-import Image from "next/image";
+// import Image from "next/image";
 import { supabase } from '@/lib/supabaseClient';
 
 export default async function Home() {
