@@ -13,7 +13,7 @@ This file lists all current tasks and subtasks managed by Task Master. Update ta
 ## Tasks
 
 ### 1. Project Setup and Infrastructure Configuration  
-**Status:** ⏱️ pending  
+**Status:** ✅ done  
 **Priority:** 🔴 high  
 **Description:** Initialize the Next.js 14 project with TypeScript, configure Tailwind CSS, and set up Supabase and Vercel integration.
 
@@ -30,11 +30,11 @@ This file lists all current tasks and subtasks managed by Task Master. Update ta
   Depends on: 1.1  
   Description: Connect the application to Supabase for data storage and authentication.
 - **1.4. Configure Vercel for Deployment**  
-  Status: ⏱️ pending  
+  Status: ✅ done  
   Depends on: 1.1  
   Description: Set up the Vercel project for continuous deployment.
 - **1.5. Install Additional Dependencies and Configure Development Environment**  
-  Status: ⏱️ pending  
+  Status: ✅ done  
   Depends on: 1.1  
   Description: Install required dependencies and set up the development environment.
 
@@ -45,6 +45,26 @@ This file lists all current tasks and subtasks managed by Task Master. Update ta
 **Priority:** 🔴 high  
 **Depends on:** 1  
 **Description:** Implement the database schemas for news items, stock data, fundraising events, and user profiles in Supabase.
+
+#### Subtasks
+- **2.1. Create News Items Schema**  
+  Status: ⏱️ pending  
+  Description: Implement the schema for news items in Supabase.
+- **2.2. Create Stock Data Schema**  
+  Status: ⏱️ pending  
+  Description: Implement the schema for stock data in Supabase.
+- **2.3. Create Fundraising Events Schema**  
+  Status: ⏱️ pending  
+  Description: Implement the schema for fundraising events in Supabase.
+- **2.4. Add placeholder UI for testing**  
+  Status: ⏱️ pending  
+  Description: Add a simple UI to help test and visualize RSS and Supabase integration.
+- **2.5. Resolve discrepancies between feed_items and news_items in Supabase**  
+  Status: ⏱️ pending  
+  Description: Ensure the schema and data in feed_items and news_items are consistent and correct.
+- **2.6. Make sure we're upserting and not duplicating entries**  
+  Status: ⏱️ pending  
+  Description: Update the code to use upsert instead of insert to avoid duplicate news entries from RSS feeds.
 
 ---
 
